@@ -17,17 +17,17 @@ readdir.stream(root, { deep: true, filter: '**/*.{cls,ltx,tex,sty}' })
     parser.setLanguage(language)
     document = parser.parse(code)
     if (document.rootNode.hasError()) {
-      console.log(chalk.red(`\u2717 ${filePath}`))
+      console.warn(chalk.red(`\u2717 ${filePath}`))
       failureCount++
     } else {
-      console.log(chalk.green(`\u2713 ${filePath}`))
+      console.warn(chalk.green(`\u2713 ${filePath}`))
     }
   })
   .on('end', () => {
     if (failureCount === 0) {
-      console.log(chalk.green('\nAll files parsed successfully.'))
+      console.warn(chalk.green('\nAll files parsed successfully.'))
     } else {
-      console.log(chalk.red(`\nParsing failed on ${failureCount} files.`))
+      console.warn(chalk.red(`\nParsing failed on ${failureCount} files.`))
       process.exit(1)
     }
   })

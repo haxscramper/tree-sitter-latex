@@ -31,7 +31,7 @@ const language = require('..')
 const ITERATION_COUNT = 100
 
 if (process.argv.length < 3) {
-  console.log('Usage: script/benchmark.js <file>')
+  console.warn('Usage: script/benchmark.js <file>')
   process.exit(1)
 }
 
@@ -46,7 +46,7 @@ profile('Tree-sitter', () => {
 })
 
 function profile (name, action) {
-  console.log(name + ':')
+  console.warn(name + ':')
   let durations = []
 
   for (let i = 0; i < ITERATION_COUNT; i++) {
@@ -54,7 +54,7 @@ function profile (name, action) {
     try {
       action()
     } catch (e) {
-      console.log('FAILED', e.message)
+      console.warn('FAILED', e.message)
       return
     }
     let endTime = Date.now()
@@ -66,5 +66,5 @@ function profile (name, action) {
   const min = durations[0]
   const max = durations[durations.length - 1]
 
-  console.log('Average:', average, 'Min:', min, 'Max:', max)
+  console.warn('Average:', average, 'Min:', min, 'Max:', max)
 }
